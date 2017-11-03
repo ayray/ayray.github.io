@@ -1,0 +1,51 @@
+#login{
+	margin: 8%;
+	text-align: left;
+}
+
+#navbar{
+	color: black;
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+}
+
+#header{
+	margin-bottom: 20px;
+	color: black;
+	font-family: 'Raleway', sans-serif;
+	font-size: 43px;
+	font-weight: 400;
+	padding-bottom: 1.5cm;
+}
+
+#header2{
+	margin-bottom: 20px;
+	color: black;
+	font-family: 'Raleway', sans-serif;
+	font-size: 23px;
+	font-weight: 400;
+	text-align: left;
+}
+
+
+#header3{
+	margin-bottom: 20px;
+	color: black;
+	font-family: 'Raleway', sans-serif;
+	font-size: 15px;
+	text-align: left;
+}
+
+
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-position: center;
+    background-size: 100%;
+    /*background-image: url("./login.jpg"); */
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
