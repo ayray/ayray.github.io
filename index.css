@@ -1,4 +1,14 @@
-#login{
+
+body {
+    opacity: 1;
+    transition: 1s opacity;
+}
+body.fade-out {
+    opacity: 0;
+    transition: none;
+}
+
+#container{
 	margin: 16%;
 	text-align: center;
 }

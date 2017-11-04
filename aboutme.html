@@ -12,8 +12,10 @@
 
     <script src="assets/bootstrap-4.0.0-alpha.6-dist/js/tether.min.js"></script>
     <script src="assets/bootstrap-4.0.0-alpha.6-dist/js/bootstrap.min.js"></script>
+    <!-- <script src="fadeout.js"></script> -->
   </head>
   <body>
+    <script> document.body.className += ' fade-out';</script>
 <!-- navbar from bootstrap framework -->
     <nav class="navbar navbar-toggleable-md navbar-light bg-none">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +32,7 @@
   </nav>
 
     <div id= "background"></div>
-    <div class="container-fluid" id="login">
+    <div class="container-fluid" id="container">
       
       <h1 id= "header" class="text-left" style="">PROJECTS </h1>
       <P>
@@ -41,6 +43,11 @@
       <A id= "header2" class="link" style="" HREF = "./aboutme.html">ABOUT ME</A>
       </P> -->
       </div>
+<script>
+$((document).ready(function() {
+  $('body').removeClass(' fade-out');
+});
+</script>
   </body>
 </html>
 
