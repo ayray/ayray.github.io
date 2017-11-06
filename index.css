@@ -1,8 +1,9 @@
 
 body {
-    opacity: 1;
-    transition: 1s opacity;
+  opacity: 1;
+  transition: 1s opacity;
 }
+
 body.fade-out {
     opacity: 0;
     transition: none;
@@ -57,3 +58,4 @@ body.fade-out {
     height: 100%;
     z-index: -1;
 }
+
