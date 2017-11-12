@@ -41,6 +41,9 @@
 
 @media only screen and (min-width: 400px) {
     /* For phone: */
+	#container{
+		margin: 18%;
+	}
 	#header2{
 		margin-top: 50px;
 		margin-bottom: 50px;
@@ -54,6 +57,9 @@
 }
 @media only screen and (min-width: 600px) {
     /* For tablets: */
+	#container{
+		margin: 12%;
+	}
 	#header2{
 		margin-bottom: 50px;
 		margin-top: 50px;
@@ -67,6 +73,9 @@
 }
 @media only screen and (min-width: 768px) {
     /* For desktop: */
+	#container{
+		margin: 5%;
+	}
 	#header2{
 		margin-top: 50px;
 		margin-bottom: 50px;
