@@ -38,3 +38,43 @@
     height: 100%;
     z-index: -1;
 }
+
+@media only screen and (min-width: 400px) {
+    /* For phone: */
+	#header2{
+		margin-top: 50px;
+		margin-bottom: 50px;
+		margin-left: 100px;
+		margin-right: 100px;
+		color: black;
+		font-family: 'Raleway', sans-serif;
+		font-size: 15px;
+		font-weight: 400;
+	}
+}
+@media only screen and (min-width: 600px) {
+    /* For tablets: */
+	#header2{
+		margin-bottom: 50px;
+		margin-top: 50px;
+		margin-left: 150px;
+		margin-right: 150px;
+		color: black;
+		font-family: 'Raleway', sans-serif;
+		font-size: 15px;
+		font-weight: 400;
+	}
+}
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+	#header2{
+		margin-top: 50px;
+		margin-bottom: 50px;
+		margin-left: 200px;
+		margin-right: 200px;
+		color: black;
+		font-family: 'Raleway', sans-serif;
+		font-size: 15px;
+		font-weight: 400;
+	}
+}

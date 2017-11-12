@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<!--     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Raymond Sy</title>
 
     <link href="assets/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -31,11 +30,15 @@
   </nav>
     <div id= "background"></div>
     <div id = "container2">
-      <P>
-      <img id = "pic" src="picture.jpg" alt="Zot Zot Zot">
-      </P>
+    <P>
+    <picture>
+      <source class= "pic" srcset="picture.jpg">
+      <source class= "pic" srcset="picturesmall.jpg">
+      <img class= "pic" src="picture.jpg" alt="Zot Zot Zot">
+    </picture>
+    </P>
     </div>
-    <div id = "container3">
+    <div class = "container3">
       <P>
         <h10 id = "body" class = "text-center" style=""> - I'm a full stack software engineer with the ambition to take on new challenges every day. Currently, I am finishing my Computer Science degree at the University of California, Irvine. My days usually start off with a nice cup of coffee and a music to keep me thinking critically throughout the day. My nights however, are spent dancing with my team at UCI. I find dancing and coding very similar in the sense where both require practice, dedication, and the passion to get better everyday.</h10>
       </P>
