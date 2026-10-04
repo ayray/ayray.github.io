@@ -1,0 +1,16 @@
+---
+// Projects (PORTFOLIO DEC-010): the durable home of Raymond's independent work. It lists what exists and implies nothing
+// more: no count, no "coming soon", no empty slots.
+import Base from '../../layouts/Base.astro';
+import ProjectPair from '../../components/ProjectPair.astro';
+import { projectEntries } from '../../lib/content';
+import { projectsIntro } from '../../data/profile';
+const projects = await projectEntries();
+---
+<Base title="Projects" description="Projects by Raymond Sy." claims={[...projectsIntro.claims, ...projects.flatMap((p) => p.data.cardClaims)]}>
+  <header class="wrap grid p-head">
+    <h1>Projects</h1>
+    <p class="stand">{projectsIntro.text}</p>
+  </header>
+  {projects.map((entry) => <ProjectPair entry={entry} />)}
+</Base>

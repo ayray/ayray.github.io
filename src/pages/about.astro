@@ -1,0 +1,36 @@
+---
+// About (PORTFOLIO DEC-011): Raymond first, then the background that grounds it. The record lists formal titles as held.
+import Base from '../layouts/Base.astro';
+import { about, record } from '../data/profile';
+---
+<Base title="About" description="About Raymond Sy." claims={[...about.claims, ...record.claims]}>
+  <header class="wrap grid p-head">
+    <h1>About</h1>
+    <p class="stand measure">{about.opening}</p>
+  </header>
+
+  <article>
+    <div class="wrap grid sec">
+      <p class="lab meta">Background</p>
+      <h2 class="head">Software, from testing to ownership</h2>
+      <div class="prose"><p>{about.path}</p></div>
+    </div>
+
+    <div class="wrap grid sec">
+      <p class="lab meta">How I work</p>
+      <h2 class="head">A few recurring problems</h2>
+      <div class="prose"><p>{about.themes}</p><p>{about.stance}</p></div>
+    </div>
+
+    <div class="wrap grid sec">
+      <p class="lab meta">Record</p>
+      <h2 class="head">Roles and education</h2>
+      <dl class="record">
+        {record.rows.map((r) => (
+          <div><dt>{r.org}</dt><dd>{r.roles.map((x) => <span class="role">{x.title}<span class="meta">{x.when}</span></span>)}</dd></div>
+        ))}
+      </dl>
+      <p class="meta record-note">Titles as held.</p>
+    </div>
+  </article>
+</Base>

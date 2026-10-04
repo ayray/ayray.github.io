@@ -1,0 +1,11 @@
+---
+import { MODE } from '../lib/claims';
+const { uncleared = [] } = Astro.props as { uncleared?: string[] };
+---
+{MODE === 'review' && (
+  <aside class="review" aria-label="Review build notice">
+    Review build, not published. {uncleared.length
+      ? `This page uses ${uncleared.length} claim${uncleared.length > 1 ? 's' : ''} not yet Cleared.`
+      : 'This page uses only Cleared claims.'}
+  </aside>
+)}

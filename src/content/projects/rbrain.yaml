@@ -1,0 +1,125 @@
+title: rbrain
+summary: A system for doing real work with AI agents while a person keeps the authority.
+excerpt: "It turns separate AI conversations into one coordinated working system: projects, tasks, decisions, and knowledge kept in plain files, with a person deciding what actually happens."
+order: 1
+kind: System
+status: In use
+whatItIs: A reusable system, plus my own instance of it
+cardClaims: [CLM-026, CLM-056, CLM-070]
+claims: [CLM-026, CLM-027, CLM-056, CLM-057, CLM-058, CLM-059, CLM-060, CLM-061]
+homeFigure:
+  label: Where approval is required
+  caption: The heavy left edge marks an approval boundary.
+  orientation: vertical
+  nodes:
+    - { text: "Read, plan, ordinary edits" }
+    - { text: "Commit", kind: gate, note: "owner approval" }
+    - { text: "Push", kind: gate, note: "owner approval" }
+    - { text: "Deploy", kind: gate, note: "owner approval" }
+object:
+  - diagram:
+      label: How work moves
+      orientation: horizontal
+      nodes:
+        - { text: "Orchestrator", note: "routes and briefs" }
+        - { text: "Specialist agents", note: "six roles" }
+        - { text: "Project files", note: "decisions, tasks, knowledge" }
+  - lead: Each of these needs the owner's approval
+    diagram:
+      label: Where approval is required
+      orientation: horizontal
+      nodes:
+        - { text: "Commit", kind: gate, note: "owner approval" }
+        - { text: "Push", kind: gate, note: "owner approval" }
+        - { text: "Deploy", kind: gate, note: "owner approval" }
+headerObject:
+  label: rbrain and a Personal Brain
+  orientation: horizontal
+  nodes:
+    - { text: "rbrain", note: "reusable system" }
+    - { text: "Personal Brain", note: "one person's projects, tasks, knowledge", cond: "Problem reports go back only when the owner approves sending them" }
+pull:
+  after: 3
+  text: Memory is information, not authority.
+sections:
+  - label: Why it exists
+    heading: One system instead of scattered chats
+    blocks:
+      - type: p
+        text: "I built rbrain to turn separate AI conversations into one coordinated working system: projects, tasks, decisions, and knowledge kept in plain files, with specialized agents working from shared project context and a person deciding what actually happens."
+    notes:
+      - { label: Design note, text: "Core project state lives in version-controlled files, making changes inspectable and reviewable." }
+  - label: Reusable and personal
+    heading: One system, many personal brains
+    blocks:
+      - type: p
+        text: "rbrain is the reusable part: the orchestration, the rules, the templates, the tooling. It is designed so each fork can maintain its own Personal Brain, a copy that holds that person's projects, tasks, and knowledge. Improvements flow down as ordinary updates. Personal work never flows back up on its own."
+    notes:
+      - { label: Design note, text: "Ownership is defined path by path: reusable system files are kept apart from personal state, while edits to reusable files carry ordinary merge risk." }
+  - label: Orchestration
+    heading: A coordinator and a few specialists
+    blocks:
+      - type: p
+        text: "One orchestrator understands the goal, routes work to a project, and briefs specialist agents: product, UI and UX, engineering, research, QA, and DevOps. Each specialist works from the project's own documents, not from whatever was said in a chat."
+      - type: diagram
+        diagram:
+          label: Orchestration
+          orientation: vertical
+          nodes:
+            - { text: "Owner", kind: actor }
+            - { text: "Orchestrator", note: "routes and briefs" }
+            - { text: "Specialist agents", note: "product, UI/UX, engineering, research, QA, DevOps" }
+            - { text: "Project files", note: "requirements, decisions, tasks, knowledge" }
+  - label: Authority
+    heading: Assignment is not approval
+    blocks:
+      - type: p
+        text: "Agents can read, plan, and make ordinary edits. Some actions cross a line: committing code, changing the rules agents follow, deleting things, accepting decisions, starting work, pushing, deploying. Each of those needs the owner's explicit approval, recorded so it can be audited, unless the owner has explicitly delegated that gate. Being asked to do a task never counts as permission."
+      - type: diagram
+        diagram:
+          label: Where approval is required
+          orientation: vertical
+          nodes:
+            - { text: "Read, plan, ordinary edits" }
+            - { text: "Commit", kind: gate, note: "owner approval" }
+            - { text: "Push", kind: gate, note: "owner approval" }
+            - { text: "Deploy", kind: gate, note: "owner approval" }
+    notes:
+      - { label: Design note, text: "The heavy left edge marks an approval boundary. It is the same mark everywhere on this page." }
+  - label: Project knowledge
+    heading: Knowing things without obeying them
+    blocks:
+      - type: p
+        text: "Each project keeps what it must do, what was decided, and what its owner said, separately from what it has merely learned. Learned notes can inform work but can never grant permission or override a decision, even if they are written as instructions."
+      - type: registers
+        left: { title: Governs, items: ["Requirements", "Decisions", "The owner's stated context"] }
+        right: { title: Informs, items: ["Research and observations", "Lessons from past work", "Procedures for recurring work"] }
+  - label: Self-Recovery
+    heading: Copies can report problems, not fix them
+    blocks:
+      - type: p
+        text: "When a Personal Brain hits what looks like a flaw in rbrain, it can send a report, but only after the owner reviews and approves that exact report. Upstream, reports are treated as untrusted evidence. They can become a finding, an investigation, and a proposed fix. Nothing changes until a person accepts it."
+      - type: diagram
+        diagram:
+          label: Self-Recovery
+          orientation: vertical
+          nodes:
+            - { text: "Report", note: "untrusted evidence" }
+            - { text: "Finding" }
+            - { text: "Audit" }
+            - { text: "Proposed fix" }
+            - { text: "Accepted change", kind: gate, note: "owner approval" }
+    notes:
+      - { label: Design note, text: "How many copies report the same problem never authorizes a change by itself." }
+  - label: Trade-offs
+    heading: What it gives up
+    blocks:
+      - type: p
+        text: "rbrain deliberately keeps much of its state in plain, version-controlled files. Project knowledge is loaded through declared routes rather than semantic retrieval, making context selection predictable at the cost of more explicit upkeep. Human approval remains visible at consequential boundaries, while authority can still be delegated explicitly when appropriate."
+  - label: Evolution
+    heading: Tested against its own rules
+    blocks:
+      - type: p
+        text: "The first end-to-end test proved the system usable, but it did not meet its certification bar. The reusable version later reached a separate milestone: ready for others to fork."
+    notes:
+      - { label: Design note, text: "Failures stay in the record instead of being rewritten." }

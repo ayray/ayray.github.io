@@ -1,0 +1,11 @@
+---
+import { site } from '../data/site';
+const path = Astro.url.pathname;
+const current = (href: string) => path === href || path.startsWith(href);
+---
+<header class="wrap grid site-head">
+  <a class="name" href="/">{site.name}</a>
+  <nav aria-label="Primary">
+    {site.nav.map((item) => <a href={item.href} aria-current={current(item.href) ? 'page' : undefined}>{item.label}</a>)}
+  </nav>
+</header>

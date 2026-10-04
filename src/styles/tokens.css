@@ -1,0 +1,51 @@
+/* Design tokens. Values mirror strategy/DESIGN-SYSTEM.md; details may be tuned, the concept may not. */
+@font-face {
+  font-family: "Schibsted Grotesk"; font-style: normal; font-weight: 400 900; font-display: swap;
+  src: url("/fonts/schibsted-grotesk-latin-wght-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Schibsted Grotesk"; font-style: italic; font-weight: 400 900; font-display: swap;
+  src: url("/fonts/schibsted-grotesk-latin-wght-italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("/fonts/ibm-plex-mono-latin-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("/fonts/ibm-plex-mono-latin-500.woff2") format("woff2");
+}
+/* Metric-matched fallbacks so the swap to the web fonts moves as little as possible. */
+@font-face { font-family: "Schibsted Fallback"; src: local("Arial"); size-adjust: 100%; }
+@font-face { font-family: "Plex Fallback"; src: local("Courier New"); size-adjust: 100%; }
+
+:root {
+  color-scheme: light dark;
+  --paper: #f4f4f1; --ink: #161615; --muted: #5f5f5b; --rule: #d3d3ce; --accent: #b23c18;
+  --sans: "Schibsted Grotesk", "Schibsted Fallback", ui-sans-serif, system-ui, sans-serif;
+  --mono: "IBM Plex Mono", "Plex Fallback", ui-monospace, Menlo, monospace;
+
+  --t-hero:    clamp(2.75rem, 1.35rem + 4.4vw, 5.5rem);   /* 44 → 88: the identity statement, the largest type on the site */
+  --t-title:   clamp(2.125rem, 1.2rem + 2.9vw, 3.75rem);
+  --t-stand:   clamp(1.1875rem, 1rem + .6vw, 1.4375rem);
+  --t-entry:   clamp(1.25rem, 1.08rem + .55vw, 1.5rem);
+  --t-body:    clamp(1.0625rem, 1rem + .2vw, 1.125rem);
+  --t-pull:    clamp(1.5rem, 1.15rem + 1.1vw, 2rem);
+  --t-meta:    .8125rem;
+
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 72px;
+  --section: clamp(72px, 9vw, 144px);
+
+  --margin: clamp(16px, 4.4vw, 80px);
+  --gutter: clamp(16px, 1.7vw, 28px);
+  --maxw: 1520px;
+  --cols: 12;
+
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --t-page: 260ms;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --paper: #121211; --ink: #ecebe6; --muted: #a3a29c; --rule: #2e2e2b; --accent: #ff7f50; }
+}
+@media (max-width: 1023px) { :root { --cols: 8; } }
+@media (max-width: 699px)  { :root { --cols: 4; } }

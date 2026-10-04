@@ -1,0 +1,52 @@
+---
+// A project page: object-and-label header, then sections in a reading column with design notes in the margin.
+import Diagram from './Diagram.astro';
+import ProjectPair from './ProjectPair.astro';
+import type { ProjectEntry } from '../lib/content';
+const { entry } = Astro.props as { entry: ProjectEntry };
+const d = entry.data;
+---
+<ProjectPair entry={entry} header />
+
+<article>
+  {d.sections.map((s, i) => (
+    <>
+      <div class="wrap grid sec">
+        <p class="lab meta">{s.label}</p>
+        <h2 class="head">{s.heading}</h2>
+        {(() => {
+          // Consecutive paragraphs share one reading column; other blocks sit in the wider column.
+          const groups: Array<{ kind: 'p'; texts: string[] } | { kind: 'other'; block: (typeof s.blocks)[number] }> = [];
+          for (const b of s.blocks) {
+            const last = groups[groups.length - 1];
+            if (b.type === 'p' && last?.kind === 'p') last.texts.push(b.text);
+            else if (b.type === 'p') groups.push({ kind: 'p', texts: [b.text] });
+            else groups.push({ kind: 'other', block: b });
+          }
+          return groups.map((g) =>
+            g.kind === 'p' ? (
+              <div class="prose">{g.texts.map((t) => <p set:html={t} />)}</div>
+            ) : g.block.type === 'diagram' ? (
+              <div class="blk"><Diagram diagram={g.block.diagram} /></div>
+            ) : g.block.type === 'registers' ? (
+              <div class="blk registers">
+                {[g.block.left, g.block.right].map((r) => (
+                  <div><p class="meta"><b>{r.title}</b></p><ul>{r.items.map((it) => <li>{it}</li>)}</ul></div>
+                ))}
+              </div>
+            ) : g.block.type === 'tradeoffs' ? (
+              <dl class="blk tradeoffs">{g.block.items.map((t) => <div><dt>{t.term}</dt><dd>{t.description}</dd></div>)}</dl>
+            ) : null
+          );
+        })()}
+        {s.notes.map((n) => <div class="note meta"><b>{n.label}</b>{n.text}</div>)}
+      </div>
+      {d.pull && d.pull.after === i && <div class="wrap grid"><p class="pull">{d.pull.text}</p></div>}
+    </>
+  ))}
+</article>
+
+<nav class="wrap grid next" aria-label="Continue">
+  <p class="m meta">Back</p>
+  <a href="/projects/">All projects</a>
+</nav>

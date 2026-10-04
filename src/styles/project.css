@@ -1,0 +1,33 @@
+/* Page headers, and the object-and-label pairing (PORTFOLIO DEC-011), which is used only where a project itself is
+   the subject: /projects/ and the project page header. */
+.p-head { padding-top: clamp(32px, 9vh, 112px); padding-bottom: clamp(40px, 5vw, 72px); row-gap: var(--s4); }
+.p-head h1 { grid-column: 1 / span 8; font-size: var(--t-title); line-height: 1.04; letter-spacing: -.025em; font-weight: 500; text-wrap: balance; }
+.p-head .stand { grid-column: 1 / span 7; font-size: var(--t-stand); line-height: 1.4; max-width: 40ch; }
+.p-head .stand.measure { max-width: 34ch; }
+
+.pair { row-gap: var(--s6); align-items: start; }
+.pair + .pair { margin-top: var(--section); }
+.pair > .obj { grid-column: 1 / span 8; min-width: 0; border-top: 1px solid var(--ink); padding-top: var(--s5); }
+.pair > .obj .row + .row { margin-top: 40px; padding-top: var(--s4); border-top: 1px dashed var(--rule); }
+.pair > .label { grid-column: 9 / -1; min-width: 0; border-top: 1px solid var(--ink); padding-top: var(--s4); }
+.label .kicker { margin-bottom: var(--s2); }
+.label h2 { font-size: var(--t-entry); line-height: 1.2; letter-spacing: -.01em; font-weight: 500; }
+.label h2 a { text-decoration: none; }
+.label h2 a:hover { text-decoration: underline; }
+.label .sum { margin-top: 6px; font-size: 17px; line-height: 1.45; }
+.label .ex { margin-top: var(--s3); font-size: 15px; line-height: 1.5; color: var(--muted); }
+.label .sum, .label .ex { max-width: 62ch; }
+.label .facts { margin-top: var(--s4); display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px var(--s5); }
+.label .facts dd { font-size: 15px; line-height: 1.5; }
+.label .facts dt { line-height: 1.75; }
+
+/* the project page header: the label carries the page title */
+.pair.top { padding-top: clamp(40px, 8vh, 104px); padding-bottom: var(--s7); }
+.pair.top .label h1 { font-size: var(--t-title); line-height: 1.02; letter-spacing: -.025em; font-weight: 500; margin-top: 2px; }
+.pair.top .label .sum { font-size: var(--t-stand); line-height: 1.35; margin-top: var(--s3); }
+
+@media (max-width: 1023px) {
+  .p-head h1, .p-head .stand { grid-column: 1 / -1; }
+  .pair > .obj, .pair > .label { grid-column: 1 / -1; }
+  .pair > .label { order: -1; }
+}

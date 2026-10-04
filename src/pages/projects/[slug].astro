@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import Article from '../../components/Article.astro';
+import { projectEntries } from '../../lib/content';
+export async function getStaticPaths() {
+  return (await projectEntries()).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+---
+<Base title={entry.data.title} description={entry.data.summary} claims={entry.data.claims}>
+  <Article entry={entry} />
+</Base>

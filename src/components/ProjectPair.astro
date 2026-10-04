@@ -1,0 +1,38 @@
+---
+// Object and label (PORTFOLIO DEC-011): the project is shown as an object with a label beside it. Used only where the
+// project itself is the subject (/projects/ and the project page header), never on the home page.
+import Diagram from './Diagram.astro';
+import { hrefOf, type ProjectEntry } from '../lib/content';
+const { entry, header = false } = Astro.props as { entry: ProjectEntry; header?: boolean };
+const d = entry.data;
+const objects = header ? (d.headerObject ? [{ diagram: d.headerObject }] : []) : (d.object ?? []);
+const facts = header
+  ? [['Kind', d.kind], ['What it is', d.whatItIs], ['Status', d.status], ['Built with', d.builtWith]]
+  : [['What it is', d.whatItIs]];
+---
+<section class:list={['wrap', 'grid', 'pair', header && 'top']} aria-labelledby={`${entry.id}-t`}>
+  <div class="obj">
+    {objects.map((o) => <div class="row"><Diagram diagram={o.diagram} lead={o.lead} big /></div>)}
+  </div>
+  <div class="label">
+    {header ? (
+      <>
+        <p class="meta kicker"><a href="/projects/">Projects</a></p>
+        <h1 id={`${entry.id}-t`}>{d.title}</h1>
+        <p class="sum">{d.summary}</p>
+      </>
+    ) : (
+      <>
+        <p class="meta kicker">{d.kind} · {d.status}</p>
+        <h2 id={`${entry.id}-t`}><a href={hrefOf(entry)}>{d.title}</a></h2>
+        <p class="sum">{d.summary}</p>
+        <p class="ex">{d.excerpt}</p>
+      </>
+    )}
+    <dl class="facts">
+      {facts.filter(([, v]) => v).map(([k, v]) => <><dt class="meta">{k}</dt><dd>{v}</dd></>)}
+    </dl>
+    {!header && <p class="more"><a href={hrefOf(entry)}>How it works</a></p>}
+    {d.links.length > 0 && <p class="more">{d.links.map((l) => <a href={l.url}>{l.label}</a>)}</p>}
+  </div>
+</section>

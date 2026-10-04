@@ -1,0 +1,6 @@
+/* One motion behaviour (PORTFOLIO DEC-011): continuity between pages through a cross-document view transition, only
+   when the visitor allows motion. No scroll reveals, parallax, stagger, hover animation, or looping motion. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: var(--t-page); animation-timing-function: var(--ease-out); }
+}

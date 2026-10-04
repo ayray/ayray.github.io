@@ -1,0 +1,20 @@
+* { box-sizing: border-box; margin: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--s7); }
+body { background: var(--paper); color: var(--ink); font: 400 var(--t-body)/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased; font-kerning: normal; text-rendering: optimizeLegibility; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .22em; text-decoration-color: var(--muted); }
+a:hover { text-decoration-color: var(--ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--ink); color: var(--paper); }
+ol, ul, dl, dd { margin: 0; padding: 0; }
+li { list-style: none; }
+
+/* The evidence voice: mono, small, muted. Never headings, never above 14px. */
+.meta { font: 400 var(--t-meta)/1.5 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.meta b { color: var(--ink); font-weight: 500; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip { position: absolute; left: -9999px; top: 8px; z-index: 10; background: var(--paper); padding: var(--s2) var(--s3); }
+.skip:focus { left: var(--margin); }
+
+/* Review-build furniture. Rendered only outside publish mode. */
+.review { font: 500 12px/1.4 var(--mono); letter-spacing: .02em; background: var(--ink); color: var(--paper); padding: 7px var(--margin); }

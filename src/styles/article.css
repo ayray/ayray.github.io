@@ -1,0 +1,49 @@
+/* Reading pages (project page body, About): a label column, a reading column, design notes in the margin. */
+.sec { padding-bottom: var(--s7); }
+.sec .lab { grid-column: 1 / span 2; padding-top: .45em; }
+.sec h2.head { grid-column: 3 / span 6; font-size: var(--t-entry); font-weight: 500; line-height: 1.25; letter-spacing: -.01em; margin-bottom: var(--s3); }
+.prose { grid-column: 3 / span 6; }
+.prose p { max-width: 62ch; margin-bottom: 1em; text-wrap: pretty; }
+.prose a { text-decoration-color: var(--ink); }
+.blk { grid-column: 3 / span 8; margin-block: var(--s4) var(--s6); min-width: 0; }
+.note { grid-column: 10 / -1; grid-row: 1 / span 2; align-self: start; border-top: 1px solid var(--rule); padding-top: var(--s2); margin-bottom: var(--s5); }
+.note ~ .note { grid-row: 3 / span 2; }
+.note b { display: block; margin-bottom: 2px; }
+.pull { grid-column: 3 / span 7; font-size: var(--t-pull); line-height: 1.28; letter-spacing: -.015em; font-style: italic; max-width: 26ch; padding-block: var(--s6) var(--s7); }
+.next { border-top: 1px solid var(--ink); padding-top: var(--s4); margin-top: var(--s6); align-items: baseline; row-gap: var(--s1); }
+.next .m { grid-column: 1 / span 2; }
+.next a { grid-column: 3 / span 6; font-size: var(--t-entry); text-decoration: none; padding-block: var(--s2); }
+.next a:hover { text-decoration: underline; }
+
+/* rbrain: what governs and what informs; trade-offs */
+.registers { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); }
+.registers > div { border-top: 1px solid var(--ink); padding-top: var(--s3); }
+.registers > div:last-child { border-top-style: dashed; }
+.registers ul { margin-top: var(--s3); font-size: 15.5px; }
+.registers li { padding: 6px 0; border-bottom: 1px solid var(--rule); }
+.tradeoffs div { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.tradeoffs dt { font-weight: 500; }
+.tradeoffs dd { margin: 0; }
+
+/* About record: formal titles as held, with exact dates */
+.record { grid-column: 3 / span 6; }
+.record > div { display: grid; grid-template-columns: 1fr 2fr; gap: var(--gutter); padding: 14px 0; border-top: 1px solid var(--rule); }
+.record > div:first-child { border-top-color: var(--ink); }
+.record dt { font-weight: 500; }
+.record .role { display: block; }
+.record .role + .role { margin-top: var(--s2); }
+.record .role .meta { display: block; }
+.record-note { grid-column: 3 / span 6; margin-top: var(--s3); }
+
+@media (min-width: 1600px) { .prose, .sec h2.head { grid-column: 3 / span 5; } .note { grid-column: 9 / span 3; } }
+@media (max-width: 1023px) {
+  .sec .lab { grid-column: 1 / -1; padding-top: 0; margin-bottom: var(--s2); }
+  .prose, .sec h2.head, .pull, .blk, .record, .record-note { grid-column: 1 / span 7; }
+  .note, .note ~ .note { grid-column: 1 / span 7; grid-row: auto; border-top: 0; border-left: 2px solid var(--rule); padding: 0 0 0 var(--s4); margin: 0 0 var(--s5); }
+  .next .m { grid-column: 1 / -1; } .next a { grid-column: 1 / span 7; }
+}
+@media (max-width: 699px) {
+  .prose, .sec h2.head, .pull, .blk, .note, .record, .record-note, .next a { grid-column: 1 / -1; }
+  .registers, .tradeoffs div, .record > div { grid-template-columns: 1fr; }
+  .record > div { gap: var(--s1); }
+}

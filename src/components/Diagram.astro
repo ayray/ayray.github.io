@@ -1,0 +1,26 @@
+---
+// One source definition per diagram (PORTFOLIO DEC-009). The list is the reading order. A horizontal diagram lays out in a
+// row only when its container fits the whole row (container query), otherwise it stacks; it never wraps mid-row.
+// `big` is the object size used where the project itself is the subject (DEC-011).
+interface Node { text: string; note?: string; kind: 'step' | 'actor' | 'gate'; fail?: string; cond?: string }
+interface Diagram { label: string; caption?: string; orientation: 'horizontal' | 'vertical'; nodes: Node[] }
+const { diagram, big = false, lead } = Astro.props as { diagram: Diagram; big?: boolean; lead?: string };
+const branches = diagram.nodes.filter((n) => n.fail || n.cond);
+---
+<figure class:list={['dia', big && 'big']} aria-label={diagram.label}>
+  {lead && <p class="lead meta">{lead}</p>}
+  <ol class:list={['flow', diagram.orientation === 'horizontal' && 'h']}>
+    {diagram.nodes.map((n) => (
+      <li class:list={['node', n.kind === 'actor' && 'actor', n.kind === 'gate' && 'gate']}>
+        {n.text}{n.note && <span class="n">{n.note}</span>}
+      </li>
+    ))}
+  </ol>
+  {branches.map((n) => (
+    <>
+      {n.fail && <p class="branch fail"><span class="vh">Failure path from {n.text}: </span>{n.fail}</p>}
+      {n.cond && <p class="branch cond"><span class="vh">Only with approval, from {n.text}: </span>{n.cond}</p>}
+    </>
+  ))}
+  {diagram.caption && <figcaption class="meta">{diagram.caption}</figcaption>}
+</figure>

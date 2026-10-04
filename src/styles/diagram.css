@@ -1,0 +1,46 @@
+/* The documented-flow language (strategy/DESIGN-SYSTEM.md section 6), used where the subject is a system.
+   One list per diagram. Vertical by default; a horizontal diagram becomes a row only when its container fits the whole
+   row, so it never wraps mid-row. Branches (failure or approval-only paths) are labelled blocks after the list. */
+.dia { container-type: inline-size; margin: 0; --gv: 28px; --gh: 40px; }
+.dia .lead { margin-bottom: var(--s4); }
+.dia .flow { display: flex; flex-direction: column; align-items: flex-start; gap: var(--gv); }
+.dia .node { position: relative; border: 1px solid var(--ink); padding: 8px 12px 9px; background: var(--paper);
+  font: 400 15px/1.35 var(--sans); max-width: 34ch; }
+.dia .node .n { display: block; font: 400 12.5px/1.4 var(--mono); color: var(--muted); margin-top: 2px; }
+.dia .actor { border-color: transparent; padding-left: 0; font: 400 13px/1.4 var(--mono); color: var(--muted); }
+.dia .gate { border-left-width: 4px; }
+.dia .gate .n { color: var(--ink); }
+
+/* sequence: ink line with a solid arrowhead, measured from each node's own left border */
+.dia .node + .node::before { content: ""; position: absolute; left: 20px; top: calc(-1 * var(--gv) - 1px); height: var(--gv); border-left: 1px solid var(--ink); }
+.dia .node + .node::after { content: ""; position: absolute; left: 16px; top: -10px; border: 4px solid transparent; border-top: 7px solid var(--ink); }
+.dia .gate + .node::before, .dia .node.gate::before { left: 17px; }
+.dia .node.gate::after { left: 13px; }
+.dia .node:not(.gate) + .node:not(.gate)::before { left: 20px; }
+
+.dia .branch { display: block; width: fit-content; max-width: 36ch; margin: 14px 0 0 14px; position: relative; padding: 7px 10px;
+  font: 400 12.5px/1.4 var(--mono); }
+.dia .branch::before { content: ""; position: absolute; left: 6px; top: -15px; height: 14px; border-left: 1px dashed currentColor; }
+.dia .branch.fail { border: 1px dashed var(--accent); color: var(--accent); }
+.dia .branch.cond { border: 1px dashed var(--ink); border-left: 4px solid var(--ink); color: var(--ink); }
+.dia figcaption { margin-top: var(--s4); }
+
+@container (min-width: 760px) {
+  .dia .flow.h { flex-direction: row; flex-wrap: nowrap; align-items: stretch; gap: var(--gh); }
+  .dia .flow.h .node + .node::before { left: calc(-1 * var(--gh) - 1px); top: 50%; height: 0; width: var(--gh); border-left: 0; border-top: 1px solid var(--ink); }
+  .dia .flow.h .node + .node::after { left: -10px; top: calc(50% - 4px); border: 4px solid transparent; border-left: 7px solid var(--ink); }
+  .dia .flow.h .node.gate::before { left: calc(-1 * var(--gh) - 4px); }
+  .dia .flow.h .node.gate::after { left: -13px; }
+}
+
+/* uniform column of nodes inside a project page */
+.blk .dia .flow:not(.h) .node:not(.actor) { min-width: 26ch; max-width: 40ch; }
+
+/* object size: where the project itself is the subject (DEC-011) */
+.dia.big { --gv: 36px; --gh: 52px; }
+.dia.big .node { font-size: clamp(16px, .9rem + .45vw, 21px); padding: 14px 18px 15px; max-width: none; }
+.dia.big .node .n { font-size: 13px; }
+
+@media (max-width: 699px) {
+  .dia .node, .blk .dia .flow:not(.h) .node:not(.actor) { max-width: none; min-width: 0; }
+}

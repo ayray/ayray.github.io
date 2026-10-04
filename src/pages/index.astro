@@ -1,0 +1,38 @@
+---
+// Home (PORTFOLIO DEC-011): Raymond first, then what he makes, then his professional background.
+import Base from '../layouts/Base.astro';
+import ProjectEntry from '../components/ProjectEntry.astro';
+import { projectEntries } from '../lib/content';
+import { identity, now, background } from '../data/profile';
+
+const projects = await projectEntries();
+const claims = [...identity.claims, ...now.flatMap((n) => n.claims), ...background.claims, ...projects.flatMap((p) => p.data.cardClaims)];
+---
+<Base claims={claims}>
+  <section class="wrap grid hero" aria-label="Introduction">
+    <h1>{identity.lines.map((l) => <span>{l}</span>)}</h1>
+    <dl class="now">
+      {now.map((n) => (
+        <div>
+          <dt class="meta">{n.label}</dt>
+          <dd>{n.text}{n.link && <> <a href={n.link.href}>{n.link.label}</a>.</>}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="wrap grid band" aria-labelledby="projects-h" id="projects">
+    <div class="rule"></div>
+    <h2 id="projects-h">Projects</h2>
+    <div class="body">{projects.map((entry) => <ProjectEntry entry={entry} />)}</div>
+  </section>
+
+  <section class="wrap grid band last" aria-labelledby="background-h">
+    <div class="rule"></div>
+    <h2 id="background-h">Background</h2>
+    <div class="body">
+      <p class="measure">{background.text}</p>
+      <p class="more"><a href="/about/">More about me</a></p>
+    </div>
+  </section>
+</Base>

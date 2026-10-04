@@ -1,0 +1,25 @@
+{
+  "name": "raymond-sy-portfolio",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:publish": "PORTFOLIO_MODE=publish astro build",
+    "preview": "astro preview",
+    "claims:sync": "node scripts/sync-claims.mjs",
+    "fonts": "node scripts/copy-fonts.mjs",
+    "test": "playwright test",
+    "screenshots": "node scripts/screenshots.mjs"
+  },
+  "dependencies": {
+    "astro": "7.3.5"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@fontsource-variable/schibsted-grotesk": "5.3.0",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@playwright/test": "1.63.0"
+  }
+}

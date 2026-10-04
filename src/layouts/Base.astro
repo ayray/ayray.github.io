@@ -1,0 +1,35 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ReviewBanner from '../components/ReviewBanner.astro';
+import { useClaims } from '../lib/claims';
+import { site } from '../data/site';
+
+interface Props { title?: string; description?: string; claims?: string[] }
+const { title, description = site.description, claims = [] } = Astro.props as Props;
+const uncleared = useClaims(claims, Astro.url.pathname);
+const full = title ? `${title} - ${site.name}` : site.name;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>{full}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <ReviewBanner uncleared={uncleared} />
+    <Header />
+    <main id="main"><slot /></main>
+    <Footer />
+  </body>
+</html>

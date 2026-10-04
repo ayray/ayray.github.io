@@ -1,0 +1,17 @@
+---
+// A project on the home page: text beside one figure.
+import Diagram from './Diagram.astro';
+import { hrefOf, type ProjectEntry } from '../lib/content';
+const { entry } = Astro.props as { entry: ProjectEntry };
+const d = entry.data;
+---
+<article class="proj">
+  <div class="txt">
+    <h3><a href={hrefOf(entry)}>{d.title}</a></h3>
+    <p class="sum">{d.summary}</p>
+    <p class="ex">{d.excerpt}</p>
+    <p class="meta tags">Independent · {d.kind} · {d.status}</p>
+    <p class="more"><a href={hrefOf(entry)}>How it works</a> · <a href="/projects/">All projects</a></p>
+  </div>
+  {d.homeFigure && <div class="fig"><Diagram diagram={d.homeFigure} /></div>}
+</article>

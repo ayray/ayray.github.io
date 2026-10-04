@@ -1,0 +1,39 @@
+/* Home (PORTFOLIO DEC-011). Identity first: the hero is the largest type on the site and names a person, not a
+   profession. Context lines sit beside it at reading size; no job title is a heading, label, or standalone line. */
+.hero { padding-top: clamp(48px, 13vh, 184px); padding-bottom: var(--section); row-gap: var(--s6); align-items: end; }
+.hero h1 { grid-column: 1 / span 8; font-size: var(--t-hero); line-height: 1; letter-spacing: -.032em; font-weight: 500; }
+.hero h1 span { display: block; }
+.hero .now { grid-column: 9 / -1; font-size: 16px; line-height: 1.45; padding-bottom: .55em; }
+.hero .now div + div { margin-top: var(--s4); }
+.hero .now dt { margin-bottom: 2px; }
+@media (max-width: 1023px) { .hero h1 { grid-column: 1 / -1; } .hero .now { grid-column: 1 / span 5; } }
+@media (max-width: 699px) {
+  .hero { padding-top: clamp(40px, 9vh, 72px); }
+  .hero .now { grid-column: 1 / -1; border-top: 1px solid var(--rule); padding-top: var(--s3); }
+}
+
+/* A home section: a ruled band with a label column */
+.band { padding-bottom: var(--section); row-gap: var(--s5); }
+.band.last { padding-bottom: 0; }
+.band > .rule { grid-column: 1 / -1; border-top: 1px solid var(--ink); }
+.band > h2 { grid-column: 1 / span 2; font-size: var(--t-body); font-weight: 500; line-height: 1.4; }
+.band > .body { grid-column: 3 / -1; min-width: 0; }
+@media (max-width: 1023px) { .band > h2, .band > .body { grid-column: 1 / -1; } }
+
+/* A project on the home page: text beside one figure */
+.proj { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: var(--s6); align-items: start; }
+.proj + .proj { margin-top: var(--s8); padding-top: var(--s6); border-top: 1px solid var(--rule); }
+.proj .txt { grid-column: 1 / span 4; }
+.proj .fig { grid-column: 6 / -1; min-width: 0; }
+.proj h3 { font-size: var(--t-entry); font-weight: 500; line-height: 1.2; letter-spacing: -.01em; }
+.proj h3 a { text-decoration: none; }
+.proj h3 a:hover { text-decoration: underline; }
+.proj .sum { font-size: var(--t-entry); line-height: 1.3; color: var(--muted); margin-top: var(--s1); letter-spacing: -.005em; }
+.proj .ex { margin-top: var(--s4); max-width: 52ch; }
+.proj .tags { margin-top: var(--s4); }
+@media (max-width: 1023px) { .proj { grid-template-columns: minmax(0, 1fr); } .proj .txt, .proj .fig { grid-column: 1 / -1; } }
+
+.more { margin-top: var(--s4); }
+
+/* Direction 2's narrower editorial measure, for prose about Raymond */
+.measure { font-size: clamp(1.125rem, 1.05rem + .25vw, 1.25rem); line-height: 1.55; max-width: 40ch; text-wrap: pretty; }
