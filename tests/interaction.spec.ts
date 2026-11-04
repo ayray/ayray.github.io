@@ -14,7 +14,7 @@ test.describe('keyboard and navigation', () => {
 
   test('keyboard focus is visible on links', async ({ page }) => {
     await page.goto('/');
-    await page.locator('#projects .proj h3 a').focus();
+    await page.locator('#projects .proj h3 a').first().focus();
     const outline = await page.evaluate(() => getComputedStyle(document.activeElement!).outlineStyle + ' ' + getComputedStyle(document.activeElement!).outlineWidth);
     expect(outline).toBe('solid 2px');
   });
@@ -24,7 +24,7 @@ test.describe('keyboard and navigation', () => {
     await page.locator('header nav').getByRole('link', { name: 'Projects' }).click();
     await expect(page).toHaveURL(/\/projects\/$/);
     await expect(page.locator('header nav a[aria-current="page"]')).toHaveText('Projects');
-    await page.locator('.pair .label h2 a').click();
+    await page.locator('.pair .label h2 a', { hasText: 'rbrain' }).click();
     await expect(page).toHaveURL(/\/projects\/rbrain\/$/);
     await expect(page.locator('h1')).toHaveText('rbrain');
     await page.locator('.pair.top .kicker a').click();
@@ -33,7 +33,7 @@ test.describe('keyboard and navigation', () => {
     await page.locator('.next a').click();
     await expect(page).toHaveURL(/\/projects\/$/);
     await page.goto('/');
-    await page.locator('#projects .proj h3 a').click();
+    await page.locator('#projects .proj h3 a', { hasText: 'rbrain' }).click();
     await expect(page).toHaveURL(/\/projects\/rbrain\/$/);
     await page.locator('header nav').getByRole('link', { name: 'About' }).click();
     await expect(page).toHaveURL(/\/about\/$/);

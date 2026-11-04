@@ -25,6 +25,11 @@
 .tradeoffs dt { font-weight: 500; }
 .tradeoffs dd { margin: 0; }
 
+/* A real screen of a project: the plate frame (DESIGN-SYSTEM §5), a 1 px ink rule above and a mono caption below. */
+.shot { border-top: 1px solid var(--ink); padding-top: var(--s4); }
+.shot img { display: block; width: 100%; height: auto; outline: 1px solid var(--rule); outline-offset: -1px; }
+.shot figcaption { margin-top: var(--s2); }
+
 /* About record: formal titles as held, with exact dates */
 .record { grid-column: 3 / span 6; }
 .record > div { display: grid; grid-template-columns: 1fr 2fr; gap: var(--gutter); padding: 14px 0; border-top: 1px solid var(--rule); }

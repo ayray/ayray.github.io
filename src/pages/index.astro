@@ -24,7 +24,10 @@ const claims = [...identity.claims, ...now.flatMap((n) => n.claims), ...backgrou
   <section class="wrap grid band" aria-labelledby="projects-h" id="projects">
     <div class="rule"></div>
     <h2 id="projects-h">Projects</h2>
-    <div class="body">{projects.map((entry) => <ProjectEntry entry={entry} />)}</div>
+    <div class="body">
+      {projects.map((entry) => <ProjectEntry entry={entry} />)}
+      <p class="more all"><a href="/projects/">All projects</a></p>
+    </div>
   </section>
 
   <section class="wrap grid band last" aria-labelledby="background-h">

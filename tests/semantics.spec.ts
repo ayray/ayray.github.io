@@ -95,7 +95,7 @@ test('built pages never contain non-public, private, or placeholder material', (
     [/class="placeholder"/, 'placeholder markup'],
   ];
   const files = pages();
-  expect(files.length).toBe(5);
+  expect(files.length).toBe(6);
   for (const f of files) {
     const html = readFileSync(f, 'utf8');
     expect(html, `${f}: link to a retired /work/ route`).not.toMatch(/href="\/work/);
@@ -251,13 +251,13 @@ test.describe('Projects with one project', () => {
     const entries = readdirSync('src/content/projects').filter((f) => f.endsWith('.yaml'));
     await page.goto('/projects/');
     await expect(page.locator('main section.pair')).toHaveCount(entries.length);
-    await expect(page.locator('main h2')).toHaveText(['rbrain']);
+    await expect(page.locator('main h2')).toHaveText(['rbrain', 'Energy Readiness']);
     expect(await page.locator('main').textContent()).not.toMatch(/\b\d+\s+projects?\b|one project|only project|more (projects|soon)|coming|stay tuned/i);
   });
 
   test('the home page shows the same projects and links to /projects/', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('#projects .proj h3')).toHaveText(['rbrain']);
+    await expect(page.locator('#projects .proj h3')).toHaveText(['rbrain', 'Energy Readiness']);
     await expect(page.locator('#projects a[href="/projects/"]')).toHaveCount(1);
   });
 

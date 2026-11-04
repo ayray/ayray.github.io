@@ -11,7 +11,8 @@ const d = entry.data;
     <p class="sum">{d.summary}</p>
     <p class="ex">{d.excerpt}</p>
     <p class="meta tags">Independent · {d.kind} · {d.status}</p>
-    <p class="more"><a href={hrefOf(entry)}>How it works</a> · <a href="/projects/">All projects</a></p>
+    <p class="more"><a href={hrefOf(entry)}>How it works</a></p>
+    {d.links.length > 0 && <p class="more links">{d.links.map((l, i) => <>{i > 0 && ' · '}<a href={l.url}>{l.label}</a></>)}</p>}
   </div>
   {d.homeFigure && <div class="fig"><Diagram diagram={d.homeFigure} /></div>}
 </article>

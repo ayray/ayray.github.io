@@ -1,0 +1,142 @@
+title: Energy Readiness
+summary: From battery intelligence to operational decisions.
+excerpt: "An independent product concept exploring how battery-health signals, telemetry freshness, and human approval can support operational readiness decisions."
+order: 2
+kind: Technical product management
+status: Live prototype
+whatItIs: An independent product concept with simulated data. Not affiliated with Safire Technology Group.
+builtWith: React, TypeScript, and Vite. Static, with no backend.
+links:
+  - { label: Launch live demo, url: "https://ayray.github.io/energy-readiness/" }
+  - { label: Source on GitHub, url: "https://github.com/ayray/energy-readiness" }
+cardClaims: [CLM-071, CLM-077]
+claims: [CLM-071, CLM-072, CLM-073, CLM-074, CLM-075, CLM-076, CLM-077, CLM-078, CLM-079]
+homeFigure:
+  label: One readiness decision
+  caption: Stale data changes which actions are allowed.
+  orientation: vertical
+  nodes:
+    - { text: "Health flag changes", note: "Normal to Watch, mock data" }
+    - { text: "Check how old the data is", fail: "Data out of date: the assessment is withheld and dismissal is blocked" }
+    - { text: "Review the evidence", note: "what it shows, what it does not" }
+    - { text: "Operator decides", kind: gate, note: "inspect, or dismiss with a reason" }
+object:
+  - diagram:
+      label: How the decision works
+      orientation: horizontal
+      nodes:
+        - { text: "Observe", note: "telemetry and data age" }
+        - { text: "Understand", note: "evidence and its limits" }
+        - { text: "Decide", kind: gate, note: "recorded, never a deployment authorization" }
+headerObject:
+  label: One decision, two data conditions
+  orientation: vertical
+  nodes:
+    - { text: "Battery reports a concern", note: "simulated health flag" }
+    - { text: "Data is fresh", note: "review recommended", fail: "Data is stale: no verdict, dismissal blocked, inspection still available" }
+    - { text: "Operator decides", kind: gate, note: "request inspection, or dismiss with a reason" }
+    - { text: "Decision recorded", note: "never a deployment authorization" }
+pull:
+  after: 4
+  text: A dismissal closes the warning. It never authorizes deployment.
+sections:
+  - label: The problem
+    heading: A signal is not a decision
+    blocks:
+      - type: p
+        text: "Battery intelligence is useful only when operators can translate it into informed, accountable decisions."
+      - type: p
+        text: "Before battery-powered equipment is released for a task, someone has to decide whether it is ready. When the battery system flags a concern, or its data is out of date, that person needs to know what the flag means, what it does not mean, and what to do next, without being a battery expert."
+  - label: Hypothesis
+    heading: A short review step
+    blocks:
+      - type: p
+        text: "A focused decision-review workflow could help operators interpret battery-health concerns, understand evidence limitations, and choose an appropriate next action."
+      - type: p
+        text: "It is a hypothesis. No operator research stands behind it yet, and the prototype exists to make it testable."
+  - label: What is known
+    heading: Public, proposed, and simulated
+    blocks:
+      - type: tradeoffs
+        items:
+          - term: Public information
+            description: "Safire Technology Group publicly describes an energy operating system for monitoring and decision-making, with action taken with human approval, including in denied, degraded, and disconnected environments. The public materials reviewed describe these capabilities but do not specify the detailed operator decision workflow."
+          - term: Product hypothesis
+            description: "The review step, the person it serves (a readiness lead), and the decision rules, including a 15-minute freshness limit, are my proposals. Each needs validation with real operators."
+          - term: Simulated in the prototype
+            description: "The equipment, battery, readings, health flag, and decisions are simulated. Nothing is predicted, sent anywhere, or changed."
+  - label: Scope
+    heading: One asset, one concern, one decision
+    blocks:
+      - type: p
+        text: "The prototype focuses on a single operator decision workflow to test whether battery-health information can support clearer, more accountable decisions before deployment."
+      - type: registers
+        left:
+          title: In the MVP
+          items:
+            - One simulated equipment asset and battery system
+            - A health flag that changes from Normal to Watch
+            - Fresh versus stale telemetry
+            - Supporting evidence and its limitations
+            - Request Inspection and Dismiss Concern
+            - A recorded human decision
+        right:
+          title: Left out
+          items:
+            - Fleet views and analytics
+            - Predictions of endurance, range, or failure
+            - AI, machine learning, or confidence scores
+            - Real telemetry or hardware
+            - Autonomous actions
+            - Deployment authorization
+      - type: figure
+        image: ../../assets/projects/energy-readiness/fresh-concern.png
+        alt: "The prototype with fresh data. Battery telemetry on the left shows a mock health flag that changed from Normal to Watch, 81 percent charge, and data 3 minutes old. On the right, a review recommended warning, with Request Inspection and Dismiss Concern buttons."
+        caption: "Fresh data: a review is recommended. Simulated data."
+  - label: Decisions
+    heading: The rules that shape the workflow
+    blocks:
+      - type: tradeoffs
+        items:
+          - term: Data freshness changes which decisions are appropriate.
+            description: "The same health flag means something different when the data is 3 minutes old than when it is 42 minutes old."
+          - term: Stale data cannot support a current readiness verdict.
+            description: "Past a 15-minute limit, a proposed concept policy, the assessment is withheld and readings are shown as historical. Requesting an inspection stays available because it is the cautious action. Dismissing is blocked because it removes the warning."
+          - term: Dismissing a concern does not authorize deployment.
+            description: "A dismissal needs a reason and closes the warning. The release decision stays with the normal procedure, and the interface has no ready to deploy state."
+          - term: Requesting inspection is an escalation, not a completed inspection.
+            description: "The request is recorded as open, and readiness stays unresolved until the review is done."
+          - term: Operator decisions remain distinct from underlying battery condition.
+            description: "The telemetry keeps showing what the battery reported. The decision record shows what was decided, about which reading, and when."
+      - type: figure
+        image: ../../assets/projects/energy-readiness/stale-assessment-withheld.png
+        alt: "The prototype with stale data. The telemetry panel is marked as historical readings, 42 minutes old. The warning reads Cannot assess, data out of date, and Dismiss Concern is disabled with an explanation, while Request Inspection stays available."
+        caption: "Stale data: no verdict, and dismissal is blocked. Simulated data."
+      - type: figure
+        image: ../../assets/projects/energy-readiness/decision-record.png
+        alt: "The prototype after a dismissal. The status reads Concern dismissed, not a deployment authorization. A decision record lists the action, the concern with the health flag and data age, the time, the reason, and the status."
+        caption: "A recorded dismissal, which is not a deployment authorization. Simulated data."
+  - label: Validation
+    heading: What real operators would need to show
+    blocks:
+      - type: p
+        text: "Before any production use, the concept would need testing with the people who make release decisions. I would interview five to eight readiness leads or maintainers who work with battery-powered equipment: who decides, what data they trust, how often data is stale, what a wrong call costs, and what they record. Two usability tasks would follow: deciding whether the robot can deploy, and deciding what to do when the data is 40 minutes old."
+      - type: p
+        text: "The hypothesis holds if people reach the intended action quickly and can explain why. It fails if the decision belongs to someone else, if the health flag is not trusted or visible, or if stale data is rare or already handled by procedure. Any of those would change the persona, the trigger, or the freshness rule."
+      - type: tradeoffs
+        items:
+          - term: Primary measure
+            description: "The share of flagged concerns resolved with a documented, appropriate decision."
+          - term: Longer-term outcome
+            description: "Energy-related deployment interruptions per 100 deployments."
+          - term: Guardrails
+            description: "Inappropriate dismissals must not rise, and no concern should be dismissed on stale data."
+    notes:
+      - { label: Not yet measured, text: "These are measures for a real pilot. The prototype uses simulated data and validates none of them." }
+  - label: How it was made
+    heading: My decisions, AI-assisted work
+    blocks:
+      - type: p
+        text: "I set the direction and made the product decisions: the problem, the person it serves, the scope, and the rules. AI assistance helped with the research, the drafts, and the code, under my direction and review."
+      - type: p
+        text: "The prototype is checked by automated tests, including accessibility checks."

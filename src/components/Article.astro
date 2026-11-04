@@ -1,5 +1,6 @@
 ---
 // A project page: object-and-label header, then sections in a reading column with design notes in the margin.
+import { Image } from 'astro:assets';
 import Diagram from './Diagram.astro';
 import ProjectPair from './ProjectPair.astro';
 import type { ProjectEntry } from '../lib/content';
@@ -36,6 +37,12 @@ const d = entry.data;
               </div>
             ) : g.block.type === 'tradeoffs' ? (
               <dl class="blk tradeoffs">{g.block.items.map((t) => <div><dt>{t.term}</dt><dd>{t.description}</dd></div>)}</dl>
+            ) : g.block.type === 'figure' ? (
+              <figure class="blk shot">
+                <Image src={g.block.image} alt={g.block.alt} widths={[640, 960, 1280, 1920]}
+                  sizes="(min-width: 1024px) 60vw, 92vw" loading="lazy" decoding="async" />
+                <figcaption class="meta">{g.block.caption}</figcaption>
+              </figure>
             ) : null
           );
         })()}

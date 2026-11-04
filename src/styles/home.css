@@ -34,6 +34,8 @@
 @media (max-width: 1023px) { .proj { grid-template-columns: minmax(0, 1fr); } .proj .txt, .proj .fig { grid-column: 1 / -1; } }
 
 .more { margin-top: var(--s4); }
+.more + .more { margin-top: var(--s2); }
+.more.all { margin-top: var(--s7); padding-top: var(--s4); border-top: 1px solid var(--rule); }
 
 /* Direction 2's narrower editorial measure, for prose about Raymond */
 .measure { font-size: clamp(1.125rem, 1.05rem + .25vw, 1.25rem); line-height: 1.55; max-width: 40ch; text-wrap: pretty; }

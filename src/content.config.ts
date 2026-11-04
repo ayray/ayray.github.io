@@ -24,7 +24,8 @@ const diagram = z.object({
 });
 
 const note = z.object({ label: z.string(), text: z.string() });
-const block = z.discriminatedUnion('type', [
+// `image` is Astro's content image helper: a path relative to the entry, optimized by astro:assets at build time.
+const blockOf = (image: () => z.ZodTypeAny) => z.discriminatedUnion('type', [
   z.object({ type: z.literal('p'), text: z.string() }),
   z.object({ type: z.literal('diagram'), diagram }),
   z.object({
@@ -33,17 +34,19 @@ const block = z.discriminatedUnion('type', [
     right: z.object({ title: z.string(), items: z.array(z.string()) }),
   }),
   z.object({ type: z.literal('tradeoffs'), items: z.array(z.object({ term: z.string(), description: z.string() })) }),
+  // A real screen of the project (FR-010): alt text describes it; the caption says what it is.
+  z.object({ type: z.literal('figure'), image: image(), alt: z.string().min(1), caption: z.string() }),
 ]);
-const section = z.object({
+const sectionOf = (image: () => z.ZodTypeAny) => z.object({
   label: z.string(),
   heading: z.string(),
-  blocks: z.array(block),
+  blocks: z.array(blockOf(image)),
   notes: z.array(note).default([]),
 });
 
 const projects = defineCollection({
   loader: glob({ pattern: '*.yaml', base: './src/content/projects' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     summary: z.string(),                                  // one line, used everywhere the project is named
     excerpt: z.string(),                                  // two or three sentences for home and /projects/
@@ -58,7 +61,7 @@ const projects = defineCollection({
     headerObject: diagram.optional(),                     // the project page header
     claims: z.array(claimId).default([]),                 // claims used on the project page
     cardClaims: z.array(claimId).default([]),             // claims used where the project is listed (home, /projects/)
-    sections: z.array(section),
+    sections: z.array(sectionOf(image)),
     pull: z.object({ text: z.string(), after: z.number() }).optional(),   // at most one per page
   }),
 });
