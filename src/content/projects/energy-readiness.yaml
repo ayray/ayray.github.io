@@ -17,7 +17,7 @@ homeFigure:
   orientation: vertical
   nodes:
     - { text: "Health flag changes", note: "Normal to Watch, mock data" }
-    - { text: "Check how old the data is", fail: "Data out of date: the assessment is withheld and dismissal is blocked" }
+    - { text: "Check how old the data is", fail: "Stale data: the readiness assessment is withheld and dismissal is blocked" }
     - { text: "Review the evidence", note: "what it shows, what it does not" }
     - { text: "Operator decides", kind: gate, note: "inspect, or dismiss with a reason" }
 object:
@@ -46,7 +46,7 @@ sections:
       - type: p
         text: "Battery intelligence is useful only when operators can translate it into informed, accountable decisions."
       - type: p
-        text: "Before battery-powered equipment is released for a task, someone has to decide whether it is ready. When the battery system flags a concern, or its data is out of date, that person needs to know what the flag means, what it does not mean, and what to do next, without being a battery expert."
+        text: "Before battery-powered equipment is released for a task, someone has to decide whether it is ready. When the battery system flags a concern or its readings are no longer current, that person needs to know what the flag means, what it does not mean, and what to do next, without being a battery expert."
   - label: Hypothesis
     heading: A short review step
     blocks:
@@ -125,14 +125,20 @@ sections:
         text: "The hypothesis holds if people reach the intended action quickly and can explain why. It fails if the decision belongs to someone else, if the health flag is not trusted or visible, or if stale data is rare or already handled by procedure. Any of those would change the persona, the trigger, or the freshness rule."
       - type: tradeoffs
         items:
-          - term: Primary measure
-            description: "The share of flagged concerns resolved with a documented, appropriate decision."
-          - term: Longer-term outcome
-            description: "Energy-related deployment interruptions per 100 deployments."
-          - term: Guardrails
-            description: "Inappropriate dismissals must not rise, and no concern should be dismissed on stale data."
+          - term: "Primary KPI: Appropriate decision rate"
+            description: "Percentage of flagged battery concerns where the operator chooses the correct next action and records the required information."
+          - term: "Supporting metric: Decision completion rate"
+            description: "Percentage of flagged battery concerns that result in a recorded operator decision."
+          - term: "Longer-term outcome: Energy-related deployment interruption rate"
+            description: "Measure whether energy-related interruptions become less frequent as a percentage of total deployments."
+          - term: "Guardrail metric: Inappropriate dismissal rate"
+            description: "Track the percentage of dismissals later determined to be unjustified."
+          - term: "Guardrail metric: Stale-data dismissal rate"
+            description: "Percentage of concerns dismissed while readings are stale. Target: 0%."
+      - type: p
+        text: "Decision quality would be evaluated against predefined scenarios during usability testing and reviewed by qualified operators during a real pilot."
     notes:
-      - { label: Not yet measured, text: "These are measures for a real pilot. The prototype uses simulated data and validates none of them." }
+      - { label: Not yet measured, text: "These are proposed measures for a future operator pilot. The prototype has not been validated with real operators." }
   - label: How it was made
     heading: My decisions, AI-assisted work
     blocks:
